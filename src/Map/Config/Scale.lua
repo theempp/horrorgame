@@ -32,7 +32,7 @@ Scale.STAIR = {
 	flightRise = 8, -- 2.24 m between landings (FSS: <= 3.5 m rise without a landing)
 }
 Scale.LADDER = { width = 4, riser = 1, tread = 1.1, maxAngleDeg = 55 } -- accommodation ladder <= 55 deg
-Scale.AVATAR = { height = 5.2, width = 2.2, eyeHeight = 4.5, pathRadius = 2, pathHeight = 5 }
+Scale.AVATAR = { height = 5.2, width = 2.2, eyeHeight = 4.5, pathRadius = 1.5, pathHeight = 5 }
 Scale.MIN_HEADROOM = 7 -- clear height required over any walkable surface
 Scale.MIN_CLEAR_PATH = 3 -- clear width required on any required route (door leafs, furniture)
 

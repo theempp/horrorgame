@@ -41,7 +41,7 @@ Current state: step 1 verified and committed; steps 1–2 verified; next is step
 6. DONE: Manifest + Anchors (all 20 required tags + extras in Config/Tags.lua), volumes (MajorZone, AudioZone, StreamingRegion, PlayableVolume, StalkerZone, ReviveSafeArea), variants to ServerStorage.
 7. DONE (headless; Studio UI check pending): Runtime client modules (Atmosphere blend, Quality tiers, LightCircuits/PowerState, DoorPresenter, Lighthouse/radar) + Review mode UI.
 8. DONE: default.project.json + review.project.json (Workspace streaming props set in project file — not scriptable).
-9. Tests: determinism, tags/min counts, spec coverage, voxel nav reachability + containment, clearances, budgets, zone identity, rojo build.
+9. DONE: Tests: determinism, tags/min counts, spec coverage, voxel nav reachability + containment, clearances, budgets, zone identity, rojo build.
 10. Docs: README, STATUS, RESEARCH_LOG (sources already gathered — see below), MAP_SCALE, PERFORMANCE_BUDGET, PRESENTATION_API, MAP_REVIEW_CHECKLIST. Commit.
 11. Optional: open review place in Roblox Studio (installed) for real inspection.
 

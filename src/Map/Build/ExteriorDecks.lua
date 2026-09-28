@@ -57,7 +57,9 @@ function Exterior.build(ctx, root, spec)
  line("FootForward",194,60,194,65,7)
  -- Sloping anti-vault strips follow the flight; no wall crosses either landing.
  for _, z in ipairs({60.1,64.9}) do
-  ctx:bar(m,"LadderBoundary"..z,Vector3.new(204,11.5,z),Vector3.new(229,36.5,z),{9,0.3},"volume",{transparency=1,query=false,tags={"PlayBoundary"}})
+  for i=0,24 do
+   ctx:box(m,"LadderBoundary"..z.."_"..i,204+i,7+i,z-0.15,205+i,17+i,z+0.15,"volume",{transparency=1,query=false,tags={"PlayBoundary"}})
+  end
  end
  Signs.make(ctx,m,CFrame.lookAt(Vector3.new(193,42,24),Vector3.new(200,42,24)),9,2,{"CORAL MERIDIAN","BOARD HERE"},"public")
  for _, z in ipairs({20,28}) do

@@ -24,7 +24,7 @@ function Harbor.build(ctx,root)
  -- Seven-stud gangway; 3.5-stud rise, horizontal landings at both ends.
  ctx:bar(m,"Gangway",Vector3.new(158,6,591),Vector3.new(158,9.5,598),{0.5,4},"steel_grate")
  for _,x in ipairs({155.7,160.3}) do
-  Rails.run(ctx,m,{Vector3.new(x,6.5,591),Vector3.new(x,10,598)},{name="GangwayRail"..x})
+  Rails.run(ctx,m,{Vector3.new(x,6.5,591),Vector3.new(x,10,598)},{name="GangwayRail"..x,boundary=false})
  end
  for _,x in ipairs({150,166}) do
   Rails.run(ctx,m,{Vector3.new(x,10,614),Vector3.new(x,10,699)},{name="PierRail"..x})

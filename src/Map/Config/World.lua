@@ -111,7 +111,7 @@ World.tender = {
 	deckY = 6,
 	speed = 22, -- studs/s for review playback; ~24 s along the route below
 	route = {
-		{ 162, 4, 584 },
+		{ 162, 4, 568 },
 		{ 170, 4, 540 },
 		{ 200, 4, 440 },
 		{ 236, 4, 300 },
@@ -119,7 +119,7 @@ World.tender = {
 		{ 236, 4, 100 },
 		{ 208, 4, 71 },
 	},
-	mooredCenter = { 162, 4, 584 },
+	mooredCenter = { 162, 4, 568 },
 	alongsideCenter = { 208, 4, 71 },
 }
 
@@ -134,7 +134,7 @@ World.harbor = {
 	quay = { x0 = -40, x1 = 360, z0 = 700, z1 = 744 },
 	pier = { x0 = 150, x1 = 166, z0 = 612, z1 = 700 },
 	pierHead = { x0 = 136, x1 = 180, z0 = 598, z1 = 612 },
-	pontoon = { x0 = 146, x1 = 172, z0 = 590, z1 = 598, y = 6.5 },
+	pontoon = { x0 = 146, x1 = 172, z0 = 588, z1 = 598, y = 6.5 },
 	gangway = { x0 = 156, x1 = 160, zTop = 598, zBottom = 591 },
 	office = { x0 = 96, x1 = 132, z0 = 708, z1 = 734, h = 15 },
 	briefing = { 138, 10, 720 },

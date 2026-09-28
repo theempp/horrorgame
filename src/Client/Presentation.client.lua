@@ -11,6 +11,7 @@ local Lights=require(Map.Runtime.LightCircuits)
 local Doors=require(Map.Runtime.DoorPresenter)
 local Exterior=require(Map.Runtime.Exterior)
 local root=workspace:WaitForChild("PastCurfewMap")
+Lighting.ClockTime=require(Map.Config.Lighting).global.ClockTime
 local player=Players.LocalPlayer
 local saved=UserSettings():GetService("UserGameSettings").SavedQualityLevel.Value
 local defaultTier=Quality.fromSavedLevel(saved>0 and saved or nil,UserInput.TouchEnabled)

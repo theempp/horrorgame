@@ -285,14 +285,14 @@ def new_runtime():
     return lua, mock
 
 
-def run_build(seed="PastCurfew/Map/1", roots=("Workspace/PastCurfewMap", "ServerStorage/PastCurfewMapVariants", "Lighting")):
+def run_build(seed="PastCurfew/Map/1", roots=("Workspace/PastCurfewMap", "ServerStorage/PastCurfewMapVariants", "Lighting"), variant="v1"):
     lua, mock = new_runtime()
-    runner = lua.eval("""function(seed)
+    runner = lua.eval("""function(seed, variant)
         local MB = require(game:GetService("ReplicatedStorage").PastCurfew.Map.MapBuilder)
-        local report = MB.build({ seed = seed })
+        local report = MB.build({ seed = seed, variant = variant })
         return report
     end""")
-    report = runner(seed)
+    report = runner(seed, variant)
     exporter = lua.eval("function(...) " + EXPORT + " end")
     text = exporter(mock, lua.table_from(list(roots)))
     rep = _lua_to_py(report)

@@ -29,6 +29,7 @@ Tags.required = {
 
 -- Additional tags this build provides.
 Tags.extra = {
+	RotatingDetail = { attrs = { "SpinPeriod" }, desc = "Client-animated radar detail" },
 	PlayableVolume = { attrs = { "VolumeId", "SpecExtension" }, desc = "Space a player may legitimately occupy (for bounds checks)" },
 	ContractBriefing = { attrs = {}, desc = "Harbor briefing board" },
 	OmenPoint = { attrs = { "OmenId" }, desc = "Optional harbor omen investigation spot" },

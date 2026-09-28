@@ -1,9 +1,8 @@
 -- Audio zones and emitter hooks. No audio assets are embedded or uploaded by
 -- this build (no verified licences). Every layer has an empty `asset` slot; the
--- client AudioZones runtime only creates AudioPlayer/AudioEmitter instances for
--- layers whose asset id has been filled in with a verified Roblox-licensed or
--- original sound. Until then the zones still exist, are tagged AudioZone, show
--- in review mode and drive room-tone/reverb metadata.
+-- current build exposes AudioZone profile/reverb metadata only. No playback
+-- runtime is installed until licensed assets are supplied. Zones remain visible
+-- in review mode.
 local Audio = {}
 
 -- Zone profiles: `bed` = looping ambience, `spot` = positional one-shots/loops.

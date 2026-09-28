@@ -61,7 +61,7 @@ function Anchors.build(ctx,root,spec,variant)
  for _,p in ipairs(stages) do anchor("boarding_"..p[1],p[2],{"BoardingPoint"},{Stage=p[1]}) end
  for i,p in ipairs(World.tender.route) do anchor("tender_"..i,p,{"TenderPath"},{Index=i}) end
  for _,z in ipairs(Zones.list) do
-  volume("zone_"..z.id,z.bounds,{"MajorZone","AudioZone"},{ZoneId=z.id,DisplayName=z.displayName,Profile=z.audio,Reverb="NoReverb",Deck=z.deck})
+  volume("zone_"..z.id,z.bounds,{"MajorZone","AudioZone"},{ZoneId=z.id,DisplayName=z.displayName,Profile=z.audio,Reverb=Audio.profiles[z.audio].reverb,Deck=z.deck})
  end
  for _,r in ipairs(spec.streaming_regions) do
   local a,b=r.bounds.min,r.bounds.max
@@ -88,6 +88,34 @@ function Anchors.build(ctx,root,spec,variant)
    if i<22 then table.insert(links,"nav_"..l.id..(i+1)) end
    anchor("nav_"..l.id..i,{8+i*8,l.floorY+2,24},{"StalkerNode"},{Deck=l.id,Links=table.concat(links,",")})
   end
+ end
+ -- Explicit stair links connect the per-deck navigation chains through landings.
+ local function link(a,b)
+  for _,pair in ipairs({{a,b},{b,a}}) do
+   local node=m:FindFirstChild(pair[1])
+   local old=node:GetAttribute("Links") or ""
+   node:SetAttribute("Links",old=="" and pair[2] or old..","..pair[2])
+  end
+ end
+ for _,st in ipairs(spec.stairs) do
+  local low,high=st.footprints[1],st.footprints[2]
+  if low.origin[2]>high.origin[2] then low,high=high,low end
+  local ox,oy,oz=low.origin[1],low.origin[2],low.origin[3]
+  local dir=oz<24 and -1 or 1
+  local edge=oz<24 and 20 or 28
+  local points={{16,0,4},{28,0,4},{28,0,10},{26,0,10}}
+  for i=1,8 do table.insert(points,{26-(i-0.5)*1.5,i,10}) end
+  table.insert(points,{12,8,10});table.insert(points,{12,8,16});table.insert(points,{14,8,16})
+  for i=1,8 do table.insert(points,{14+(i-0.5)*1.5,8+i,16}) end
+  table.insert(points,{28,16,16});table.insert(points,{28,16,4});table.insert(points,{16,16,4})
+  local index=ox==0 and 1 or 21
+  local previous="nav_"..low.level..index
+  for i,p in ipairs(points) do
+   local id="nav_"..st.id.."_"..i
+   anchor(id,{ox+p[1],oy+p[2]+2,edge+dir*p[3]},{"StalkerNode"},{Deck=low.level,Links=""})
+   link(previous,id);previous=id
+  end
+  link(previous,"nav_"..high.level..index)
  end
  for _,r in ipairs(spec.patrol_routes) do for i,p in ipairs(r.waypoints) do
   local y=p[2]>=32 and 32 or p[2]
