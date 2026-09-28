@@ -179,6 +179,7 @@ local function mast(ctx, parent, def)
 		local r = ctx:box(m, "RadarScanner", def.x - 5, def.y1 - 13, def.z - 0.4, def.x + 5, def.y1 - 12.2, def.z + 0.4, "rail_white",
 			{ collide = false, shadow = false })
 		ctx:attrs(r, { Spin = true, SpinPeriod = 3.5 })
+		ctx:tag(r, "RotatingDetail")
 	end
 	return m
 end

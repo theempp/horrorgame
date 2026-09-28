@@ -34,6 +34,7 @@ function MapBuilder.build(opts)
 	Harbor.build(ctx, root)
 	Dress.build(ctx, decks, ShipSpec, opts.variant)
 	Anchors.build(ctx, root, ShipSpec, opts.variant)
+	root:SetAttribute("PowerState", "Emergency")
 	root:SetAttribute("Ready", true)
 	return { stats = ctx.stats, issues = ctx.issues }
 end

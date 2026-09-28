@@ -39,7 +39,7 @@ Current state: step 1 verified and committed; steps 1–2 verified; next is step
 4. DONE: Harbor (quay, pier, pontoon, gangway, tender, office+briefing, warehouses, crane, lamps, buoys, lighthouse, omen slipway, boundaries).
 5. DONE: Room dressers v1/v2 per theme (keep spec loot/hide nodes clear via ctx:reserve; hide props at spec hide positions).
 6. DONE: Manifest + Anchors (all 20 required tags + extras in Config/Tags.lua), volumes (MajorZone, AudioZone, StreamingRegion, PlayableVolume, StalkerZone, ReviveSafeArea), variants to ServerStorage.
-7. Runtime client modules (Atmosphere blend, Quality tiers, LightCircuits/PowerState, DoorPresenter, Lighthouse/radar) + Review mode UI.
+7. DONE (headless; Studio UI check pending): Runtime client modules (Atmosphere blend, Quality tiers, LightCircuits/PowerState, DoorPresenter, Lighthouse/radar) + Review mode UI.
 8. default.project.json + review.project.json (Workspace streaming props set in project file — not scriptable).
 9. Tests: determinism, tags/min counts, spec coverage, voxel nav reachability + containment, clearances, budgets, zone identity, rojo build.
 10. Docs: README, STATUS, RESEARCH_LOG (sources already gathered — see below), MAP_SCALE, PERFORMANCE_BUDGET, PRESENTATION_API, MAP_REVIEW_CHECKLIST. Commit.
