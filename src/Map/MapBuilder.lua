@@ -7,6 +7,7 @@ local Shell = require(Map.Build.InteriorShell)
 local Hull = require(Map.Build.Hull)
 local Superstructure = require(Map.Build.Superstructure)
 
+local ExteriorDecks = require(Map.Build.ExteriorDecks)
 local MapBuilder = {}
 
 function MapBuilder.build(opts)
@@ -24,6 +25,7 @@ function MapBuilder.build(opts)
 	local exterior = ctx:folder(root, "ShipExterior")
 	Hull.build(ctx, exterior)
 	Superstructure.build(ctx, exterior)
+	ExteriorDecks.build(ctx, exterior, ShipSpec)
 	return { stats = ctx.stats, issues = ctx.issues }
 end
 

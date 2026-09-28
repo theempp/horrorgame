@@ -125,28 +125,26 @@ def render(build, cam, target, fov=60, W=1600, H=900, ortho=None, fog=(0.32, 700
         cyl = p.shape == "Cylinder"
         for n, corners in FACES:
             wn = _rot(p, n)
-            pts = []
-            ok = True
+            camera_points = []
             for c in corners:
                 lc = (c[0] * hx, c[1] * hy, c[2] * hz)
                 if cyl and n[0] == 0:
                     lc = (lc[0], lc[1] * 0.85, lc[2] * 0.85)
                 w = _rot(p, lc)
-                wp = [p.pos[i] + w[i] for i in range(3)]
-                rel = [wp[i] - cam[i] for i in range(3)]
-                z = sum(rel[i] * fwd[i] for i in range(3))
-                x = sum(rel[i] * right[i] for i in range(3))
-                y = sum(rel[i] * up[i] for i in range(3))
-                if ortho is None:
-                    if z < 1:
-                        ok = False
-                        break
-                    sx, sy = W / 2 + f * x / z, H / 2 - f * y / z
-                else:
-                    sx, sy = W / 2 + x * ortho, H / 2 - y * ortho
-                pts.append((sx, sy, z))
-            if not ok:
+                rel = [p.pos[i] + w[i] - cam[i] for i in range(3)]
+                camera_points.append(tuple(sum(rel[i] * axis[i] for i in range(3)) for axis in (right, up, fwd)))
+            if ortho is None:
+                clipped = []
+                for a, b in zip(camera_points, camera_points[1:] + camera_points[:1]):
+                    if a[2] >= 1:
+                        clipped.append(a)
+                    if (a[2] >= 1) != (b[2] >= 1):
+                        t = (1 - a[2]) / (b[2] - a[2])
+                        clipped.append(tuple(a[i] + t * (b[i] - a[i]) for i in range(3)))
+                camera_points = clipped
+            if len(camera_points) < 3:
                 continue
+            pts = [(W/2 + x*(ortho if ortho else f/z), H/2 - y*(ortho if ortho else f/z), z) for x,y,z in camera_points]
             # back-face cull
             if ortho is None:
                 facing = sum(wn[i] * (cam[i] - (p.pos[i] + wn[i] * 0)) for i in range(3))
@@ -160,10 +158,10 @@ def render(build, cam, target, fov=60, W=1600, H=900, ortho=None, fog=(0.32, 700
             ys = [q[1] for q in pts]
             if max(xs) < 0 or min(xs) > W or max(ys) < 0 or min(ys) > H:
                 continue
-            area = abs((xs[0] - xs[2]) * (ys[1] - ys[3]) - (xs[1] - xs[3]) * (ys[0] - ys[2])) / 2
+            area = abs(sum(xs[i]*ys[(i+1)%len(xs)] - xs[(i+1)%len(xs)]*ys[i] for i in range(len(xs))))/2
             if area < 0.4:
                 continue
-            depth = sum(q[2] for q in pts) / 4
+            depth = sum(q[2] for q in pts) / len(pts)
             shade = 0.45 + 0.55 * max(0.0, sum(wn[i] * light[i] for i in range(3)))
             col = list(p.color)
             if p.material == "Neon":

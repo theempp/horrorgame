@@ -7,7 +7,7 @@ not by merging folders or duplicating modules. The "Integration issues" section 
 Scope: the harbor approach, the ship exterior with boarding, and a representative ship interior. Deliverables: Rojo project, modular kit,
 tags and anchors, review mode, validation tests, and docs (README, STATUS, RESEARCH_LOG, MAP_SCALE, PERFORMANCE_BUDGET, PRESENTATION_API,
 MAP_REVIEW_CHECKLIST). Do not publish, upload assets, spend Robux, or use unlicensed audio.
-Current state: step 1 verified and committed; next is step 2 (ExteriorDecks).
+Current state: step 1 verified and committed; steps 1–2 verified; next is step 3 (Environment).
 
 ## User working preferences
 - Maximise work per session; be credit-efficient but prioritise map detail/quality.
@@ -34,7 +34,7 @@ Current state: step 1 verified and committed; next is step 2 (ExteriorDecks).
 
 ## Remaining (in order)
 1. DONE: Hull + Superstructure wired; 3,173 parts / 48 lights. Harness and Rojo pass; elevation and harbor previews inspected.
-2. ExteriorDecks (aft deck, port promenade + rails with lifeboat gates, accommodation ladder, board-door sign/lights).
+2. DONE: ExteriorDecks (aft deck, port promenade + rails with lifeboat gates, accommodation ladder, board-door sign/lights).
 3. Environment (Lighting/Atmosphere/Sky/post FX; terrain water fill, clear water inside hull, land/cliffs/breakwaters).
 4. Harbor (quay, pier, pontoon, gangway, tender, office+briefing, warehouses, crane, lamps, buoys, lighthouse, omen slipway, boundaries).
 5. Room dressers v1/v2 per theme (keep spec loot/hide nodes clear via ctx:reserve; hide props at spec hide positions).
