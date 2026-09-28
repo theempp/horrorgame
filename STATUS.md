@@ -11,3 +11,5 @@ Step 3 verified: atmosphere, sky/clouds, color/bloom, bounded terrain water fill
 Step 4 verified: harbor structures, pier/pontoon/gangway, moored tender, briefing/office, industrial dressing, lighthouse/buoys and boundaries. 3,833 parts / 71 lights. Harness and Rojo pass; harbor plan and spawn reveal inspected.
 
 Step 5 verified: all 32 rooms dressed with programme-specific recipes and mirrored v1/v2 layouts, spec-position hollow hide props, reserved aisles/loot/hide approaches, room lights and story papers. 4,403 parts / 103 lights (8 hero shadows). Both variants execute; plans A/B/C and ballroom inspected; Rojo passes.
+
+Step 6 verified: manifest anchors, all 20 tag minima, room/zone/streaming/playable volumes, corrected LB_mid pad, inactive room variants in ServerStorage. 4,688 replicated parts / 103 active lights; 515 inactive variant parts. Harness, tag-count check, Rojo, and tagged A-deck preview pass. Gameplay-side adapter remains to be connected.

@@ -236,6 +236,7 @@ def main():
     out_dir = sys.argv[1] if len(sys.argv) > 1 and not sys.argv[1].startswith("--") else os.path.join(ROOT, "build", "preview")
     os.makedirs(out_dir, exist_ok=True)
     build, _, _ = harness.run_build()
+    build.parts = [p for p in build.parts if p.path.startswith("Workspace/")]
     decks = {"A": 32, "B": 16, "C": 0}
     for d, y in decks.items():
         svg = plan(build, y, y + 6, (-4, -14, 200, 62), 6, "Deck %s plan slice y=%d..%d" % (d, y, y + 6))

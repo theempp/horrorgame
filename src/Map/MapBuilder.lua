@@ -11,6 +11,7 @@ local ExteriorDecks = require(Map.Build.ExteriorDecks)
 local Environment = require(Map.Build.Environment)
 local Harbor = require(Map.Build.Harbor)
 local Dress = require(Map.Build.RoomDressers)
+local Anchors = require(Map.Build.Anchors)
 local MapBuilder = {}
 
 function MapBuilder.build(opts)
@@ -32,6 +33,8 @@ function MapBuilder.build(opts)
 	Environment.build(ctx, root)
 	Harbor.build(ctx, root)
 	Dress.build(ctx, decks, ShipSpec, opts.variant)
+	Anchors.build(ctx, root, ShipSpec, opts.variant)
+	root:SetAttribute("Ready", true)
 	return { stats = ctx.stats, issues = ctx.issues }
 end
 
