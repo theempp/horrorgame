@@ -9,3 +9,5 @@ Step 2 verified: exterior decks, guarded lifeboat gates, thin-tread accommodatio
 Step 3 verified: atmosphere, sky/clouds, color/bloom, bounded terrain water fill and 116 hull air cuts, harbor land/cliffs/breakwaters. 3,517 parts / 50 lights. Harness, Rojo, harbor preview inspected. Lighting appearance requires Studio; SVG previews do not simulate Roblox post-processing.
 
 Step 4 verified: harbor structures, pier/pontoon/gangway, moored tender, briefing/office, industrial dressing, lighthouse/buoys and boundaries. 3,833 parts / 71 lights. Harness and Rojo pass; harbor plan and spawn reveal inspected.
+
+Step 5 verified: all 32 rooms dressed with programme-specific recipes and mirrored v1/v2 layouts, spec-position hollow hide props, reserved aisles/loot/hide approaches, room lights and story papers. 4,403 parts / 103 lights (8 hero shadows). Both variants execute; plans A/B/C and ballroom inspected; Rojo passes.

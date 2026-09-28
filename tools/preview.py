@@ -35,7 +35,7 @@ ANCHOR_COLORS = {
 def plan(build, y0, y1, bounds, scale, title):
     x0, z0, x1, z1 = bounds
     W, H = (x1 - x0) * scale, (z1 - z0) * scale
-    out = ['<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" viewBox="0 0 %d %d" style="background:#0b0f16">' % (W, H + 30, W, H + 30)]
+    out = ['<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" viewBox="0 0 %d %d" style="background:#0b0f16">' % (1000, 1000, max(W,H+30), max(W,H+30))]
     out.append('<text x="6" y="%d" fill="#ddd" font-family="monospace" font-size="14">%s</text>' % (H + 20, title))
 
     def rect(a, fill, op=1.0, stroke=None):
@@ -228,7 +228,7 @@ VIEWS = {
     "corridor_A": ((188, 36.5, 24), (100, 36, 24), 75),
     "corridor_B": ((10, 20.5, 24), (100, 20, 24), 75),
     "corridor_C": ((10, 4.5, 24), (100, 4, 24), 75),
-    "ballroom": ((100, 38, 31), (124, 40, 44), 80),
+    "ballroom": ((112, 38, 32), (124, 40, 44), 80),
 }
 
 

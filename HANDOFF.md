@@ -37,7 +37,7 @@ Current state: step 1 verified and committed; steps 1–2 verified; next is step
 2. DONE: ExteriorDecks (aft deck, port promenade + rails with lifeboat gates, accommodation ladder, board-door sign/lights).
 3. DONE: Environment (Lighting/Atmosphere/Sky/post FX; terrain water fill, clear water inside hull, land/cliffs/breakwaters).
 4. DONE: Harbor (quay, pier, pontoon, gangway, tender, office+briefing, warehouses, crane, lamps, buoys, lighthouse, omen slipway, boundaries).
-5. Room dressers v1/v2 per theme (keep spec loot/hide nodes clear via ctx:reserve; hide props at spec hide positions).
+5. DONE: Room dressers v1/v2 per theme (keep spec loot/hide nodes clear via ctx:reserve; hide props at spec hide positions).
 6. Manifest + Anchors (all 20 required tags + extras in Config/Tags.lua), volumes (MajorZone, AudioZone, StreamingRegion, PlayableVolume, StalkerZone, ReviveSafeArea), variants to ServerStorage.
 7. Runtime client modules (Atmosphere blend, Quality tiers, LightCircuits/PowerState, DoorPresenter, Lighthouse/radar) + Review mode UI.
 8. default.project.json + review.project.json (Workspace streaming props set in project file — not scriptable).

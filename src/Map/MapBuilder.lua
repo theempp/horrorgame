@@ -10,6 +10,7 @@ local Superstructure = require(Map.Build.Superstructure)
 local ExteriorDecks = require(Map.Build.ExteriorDecks)
 local Environment = require(Map.Build.Environment)
 local Harbor = require(Map.Build.Harbor)
+local Dress = require(Map.Build.RoomDressers)
 local MapBuilder = {}
 
 function MapBuilder.build(opts)
@@ -30,6 +31,7 @@ function MapBuilder.build(opts)
 	ExteriorDecks.build(ctx, exterior, ShipSpec)
 	Environment.build(ctx, root)
 	Harbor.build(ctx, root)
+	Dress.build(ctx, decks, ShipSpec, opts.variant)
 	return { stats = ctx.stats, issues = ctx.issues }
 end
 
