@@ -7,12 +7,12 @@ not by merging folders or duplicating modules. The "Integration issues" section 
 Scope: the harbor approach, the ship exterior with boarding, and a representative ship interior. Deliverables: Rojo project, modular kit,
 tags and anchors, review mode, validation tests, and docs (README, STATUS, RESEARCH_LOG, MAP_SCALE, PERFORMANCE_BUDGET, PRESENTATION_API,
 MAP_REVIEW_CHECKLIST). Do not publish, upload assets, spend Robux, or use unlicensed audio.
-State at handoff: step 1 below has not been started; Hull.lua and Superstructure.lua have never been run.
+Current state: step 1 verified and committed; next is step 2 (ExteriorDecks).
 
 ## User working preferences
 - Maximise work per session; be credit-efficient but prioritise map detail/quality.
 - QA everything: build it, run it, render it, inspect it, fix it — only then call it done.
-- Never edit `codex-build/` or `horrorgame.md`. Everything lives in `claude-build/`. No publishing/uploads.
+- Map work stays in `claude-build/`; the current user explicitly authorizes integration fixes in `codex-build/`. Never edit `horrorgame.md`. No publishing/uploads.
 
 ## Tooling (no global rojo/luau installed)
 - Headless run: `PYTHONDONTWRITEBYTECODE=1 ../codex-build/.venv/bin/python -B tests/harness.py`
@@ -33,7 +33,7 @@ State at handoff: step 1 below has not been started; Hull.lua and Superstructure
 - MapBuilder.lua is a temporary stub (shell only).
 
 ## Remaining (in order)
-1. Wire Hull + Superstructure into MapBuilder; run; render elevation + harbor view; fix.
+1. DONE: Hull + Superstructure wired; 3,173 parts / 48 lights. Harness and Rojo pass; elevation and harbor previews inspected.
 2. ExteriorDecks (aft deck, port promenade + rails with lifeboat gates, accommodation ladder, board-door sign/lights).
 3. Environment (Lighting/Atmosphere/Sky/post FX; terrain water fill, clear water inside hull, land/cliffs/breakwaters).
 4. Harbor (quay, pier, pontoon, gangway, tender, office+briefing, warehouses, crane, lamps, buoys, lighthouse, omen slipway, boundaries).

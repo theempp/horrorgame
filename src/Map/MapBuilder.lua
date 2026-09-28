@@ -1,8 +1,11 @@
--- Map assembly entry point (temporary: shell only; full orchestration follows).
+-- Deterministic map assembly entry point.
 local Map = script.Parent
 local Ctx = require(Map.Core.Ctx)
 local ShipSpec = require(Map.Data.ShipSpec)
 local Shell = require(Map.Build.InteriorShell)
+
+local Hull = require(Map.Build.Hull)
+local Superstructure = require(Map.Build.Superstructure)
 
 local MapBuilder = {}
 
@@ -18,6 +21,9 @@ function MapBuilder.build(opts)
 		decks[l] = ctx:model(interior, "Deck" .. l, "Nonatomic")
 	end
 	Shell.build(ctx, decks, ShipSpec)
+	local exterior = ctx:folder(root, "ShipExterior")
+	Hull.build(ctx, exterior)
+	Superstructure.build(ctx, exterior)
 	return { stats = ctx.stats, issues = ctx.issues }
 end
 

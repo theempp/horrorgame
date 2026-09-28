@@ -178,7 +178,7 @@ def render(build, cam, target, fov=60, W=1600, H=900, ortho=None, fog=(0.32, 700
             op = 1 - p.transparency
             polys.append((depth, pts, col, op))
     polys.sort(key=lambda t: -t[0])
-    out = ['<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" viewBox="0 0 %d %d">' % (W, H, W, H)]
+    out = ['<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1400" viewBox="0 %d %d %d">' % (-(W-H)//2, W, W)]
     out.append('<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0a0f18"/><stop offset="0.55" stop-color="#3a4656"/><stop offset="1" stop-color="#5b6776"/></linearGradient></defs>')
     out.append('<rect width="%d" height="%d" fill="url(#sky)"/>' % (W, H))
     # sea plane horizon (approx): draw the water as a band below the horizon line
