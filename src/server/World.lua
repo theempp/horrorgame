@@ -50,6 +50,21 @@ function World.configureConnectors()
         end
     end
 end
+function World.contractRooms(kind,fallback)
+    local choices={}
+    for _,p in ipairs(CollectionService:GetTagged("ContractSpawn")) do
+        if p:IsDescendantOf(workspace) and p:GetAttribute("ContractKind")==kind then
+            for _,room in ipairs(Map.rooms) do
+                if room.id==p:GetAttribute("RoomId") then choices[p:GetAttribute("Step")]=room end
+            end
+        end
+    end
+    return #choices>0 and choices or fallback
+end
+function World.setPowerState(value)
+    local map=workspace:FindFirstChild("PastCurfewMap")
+    if map then map:SetAttribute("PowerState",value) end
+end
 function World.part(parent,name,size,pos,color,collide)
     local p=Instance.new("Part"); p.Name=name;p.Anchored=true;p.Size=size;p.Position=pos
     p.Color=color or Color3.fromRGB(50,75,80);p.CanCollide=collide~=false;p.TopSurface=Enum.SurfaceType.Smooth;p.Parent=parent;return p

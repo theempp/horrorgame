@@ -95,6 +95,8 @@ function World.anchor(id,kind,pos,label,hold)
 end
 function World.available(p,yes)p:SetAttribute('Available',yes);p:FindFirstChildOfClass('ProximityPrompt').Enabled=yes end
 function World.build()end
+function World.contractRooms(kind,fallback)return fallback end
+function World.setPowerState(value)M.power=value end
 function World.dockPosition()return World.vector(M.modules.Config.DockPosition)end
 function World.tagPosition(tag,attribute,value,fallback)return fallback end
 function World.extractionPosition(e)

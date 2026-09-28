@@ -1,6 +1,6 @@
-# Past Curfew integration contract — v1
+# Past Curfew integration contract — v2
 
-Codex owns authoritative systems and invisible interaction anchors. Claude owns visual world and UI. Source map coordinates remain in data/map_ship.json. Do not access server modules from presentation code.
+codex-build owns authoritative systems and interaction anchors. claude-build owns map geometry, map tags and presentation; the gameplay HUD remains in codex-build. Source map coordinates remain in data/map_ship.json. Do not access server modules from presentation code.
 
 ## Roblox hierarchy
 - `ReplicatedStorage/PastCurfew/Shared`: Config, Types, Rules, MapShip modules.
@@ -23,9 +23,15 @@ Built-in prompts provide keyboard E + touch interaction. Prompt duration is mirr
 Extraction is individual: hold at either enabled lifeboat for 3 seconds; normal loot banks only for its carrier. Final call at 60 seconds opens all lifeboats; deadline captures remaining players. A secured contract unlocks for every meaningful participant, including previously extracted or captured players, at settlement. Late joiners spectate until next dock. Crew size locks at departure (1–4); no mid-run scaling or role assignment. `Retry` is accepted only in Results and returns the whole lobby to Dock. Depart is available immediately at dock.
 
 ## Presentation ownership / map adapters
-Ship bounds remain X 0–192, Y 0–48, Z 0–48; deck floor heights 32/16/0. Baseline A markers often use Y=40 while other decks use floor Y: gameplay anchors normalize to the owning deck floor + 2. Extraction uses a reachable inside pad at Z=44 (baseline exterior marker retained in data); board arrival uses corridor at X=184. Baseline LB_mid door is X=80 while extraction marker is X=96: interior extraction pad uses marker X. Greybox uses stairs within reserved footprints with traversable landings. Optional vents are not enabled in this slice; regular room doors randomize initial closed/open state and loot, entity start, conditions and contracts rotate. The full baseline generator/kit and optional connectors are future map work, not a dependency for the core slice.
+The integrated project is ../claude-build/default.project.json; review.project.json omits systems. World waits for PastCurfewMap.Ready and suppresses the standalone greybox when map modules are mounted. No module copies are required.
 
-Harbor is an optional compact staging area, immediately departable, with water/dock/boat/coast/lighthouse placeholders and no loot. Replace freely but retain anchors and dock spawn from Config. Claude can turn off both greybox ship and harbor via BuildGreybox and provide its collision shell.
+Run bounds use the union of PlayableVolume tags. PlayerSpawn Index=1 supplies dock spawn, HarborDeparture supplies departure, and OmenPoint/HideoutAlcove supply their interactions. Config.DockPosition remains only the standalone fallback. EarlyExtraction anchors supply lifeboat pads; LB_mid uses x=80, z=44, following its door instead of the old x=96 marker. Interior floor heights remain 32/16/0, with interaction anchors normalized above the floor.
+
+AgentRadius is 1.5. SightTransparent glass is excluded from stalker LOS. Optional spec vents (2x4) and hatches (2x2) remain physically closed; systems require explicit TraversableByAvatar=true and authored clearances of at least 4x6 / 4x4 before enabling them. No source spec change is implied.
+
+ContractSpawn tags choose rooms by ContractKind and Step. Restoring power sets Workspace.PastCurfewMap.PowerState to On; departure resets Emergency. Door presentation follows the gameplay anchor's Closed attribute. Map-generated volumes and visual anchors never grant rewards or replace server interaction validation. Harbor departure still transfers immediately; the 27-second reveal is a review-camera feature.
+
+See ../claude-build/docs/PRESENTATION_API.md for the tag schema and ../claude-build/docs/MAP_REVIEW_CHECKLIST.md for pending Studio gates.
 
 ## Extension seams
 Config.Contracts defines named recovery, restore power then recover, and multi-room evidence chains. RewardPolicy in Rules is the sole contract-sharing predicate; future traitor logic must extend it with notice and consolation protection. Config.Items / Collection defines artifact sets and cosmetic-only rewards. Profile module owns versioned persistence and session lease. Analytics module exposes named events, device class and a replaceable sink; never send personal text. No monetization remotes or marketplace calls exist. Profile load/save errors block subsequent departure; a reconnect cannot replace a pending unsaved session with stale stored data.

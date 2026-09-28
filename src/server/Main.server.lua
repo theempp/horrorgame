@@ -155,6 +155,7 @@ end
 local function setupContract()
     local pool={};for _,room in ipairs(Map.rooms) do if room.level~="A" then table.insert(pool,room) end end
     for i=#pool,2,-1 do local j=rng:NextInteger(1,i);pool[i],pool[j]=pool[j],pool[i] end
+    pool=World.contractRooms(contract.kind,pool)
     local total=contract.kind=="recover" and 1 or (contract.kind=="power" and 2 or 3)
     local visited={}
     local powerDoor
@@ -174,6 +175,7 @@ local function setupContract()
             visited[i]=true;contractProgress=contractProgress+1;state:SetAttribute("ContractProgress",contractProgress)
             mark(p,"first_contract_progress");discovery(p,"contract_"..i);World.available(part,false);emitNoise(p,18)
             if contract.kind=="power" and i==1 then
+                World.setPowerState("On")
                 World.available(contractAnchors[2],true)
                 if powerDoor then powerDoor:SetAttribute("ContractLocked",false);powerDoor:SetAttribute("Closed",false);powerDoor.CanCollide=false;powerDoor.Transparency=.8 end
             end
@@ -191,6 +193,7 @@ local function depart(player)
     if #crew==0 or not table.find(crew,player) then return end
     busy=true;cleanup();runId=HttpService:GenerateGUID(false);secured=false;contractProgress=0
     phase="Run";state:SetAttribute("Phase",phase);state:SetAttribute("RunId",runId);state:SetAttribute("Condition",Config.Conditions[rng:NextInteger(1,#Config.Conditions)])
+    World.setPowerState("Emergency")
     endAt=now()+Config.RoundSeconds;state:SetAttribute("EndsAt",endAt)
     participants={}
     for index,pl in ipairs(crew) do if index<=4 then

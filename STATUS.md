@@ -23,12 +23,14 @@
 
 Studio play-mode physics/pathfinding, real prompt signal order under latency, phone/tablet layout, four-client play and live DataStore/analytics remain unverified. UI automation could open the local place but could not select its new Studio window. `TEST_PLAN.md` gives concrete integration gates. No claim that mocks prove engine behavior or production anti-cheat.
 
-Presentation/UI/audio are placeholders. Harbor boat travel is immediate transfer. Conditions currently expose presentation hooks only. The cosmetic hideout sample persists ownership/attributes; Claude supplies its display. Optional vents/hatches, full modular-kit generation, the exact baseline pacing measurement, matchmaking, broad content, resort, traitors and commerce are deferred.
+The standalone presentation and gameplay HUD are placeholders; the integrated sibling project supplies the authored map. Audio remains metadata only. Harbor boat travel is immediate transfer. Conditions currently expose presentation hooks only. The cosmetic hideout sample persists ownership/attributes; the map supplies its display. Optional traversable vents/hatches, the exact baseline pacing measurement, matchmaking, broad content, resort, traitors and commerce are deferred.
 
 ## Next integration need
 
-Claude should consume `INTEGRATION_CONTRACT.md`, retain system anchors/doors/stalker authority, replace the world collision/visual shell and HUD, then verify solo stair traversal + stalker chase before four-client/mobile testing. First-party source and generated build are confined to `codex-build`; `horrorgame.md` and any Claude directory are untouched. No publication/deployment occurred.
+The sibling map is now integrated through ../claude-build/default.project.json. Verify solo stair traversal, stalker chase, real prompt/door behavior, then four-client/mobile testing. Source ownership remains split between the two repositories. No publication occurred.
 
 ## Map takeover integration
 
 2026-09-27: initial inherited state committed before edits. Integrated project is ../claude-build/default.project.json; standalone greybox remains available here. World waits for tagged map readiness, suppresses duplicate greybox, reads PlayerSpawn/HarborDeparture/OmenPoint/HideoutAlcove and EarlyExtraction. Run bounds use the union of PlayableVolume tags. LB_mid fallback now follows its door at x=80. AgentRadius stays 1.5 in shared Config. SightTransparent parts are excluded from stalker LOS. Optional connectors remain physically closed and TraversableByAvatar=false unless authored clearances meet 4x6 vent / 4x4 hatch policy; no spec edits. Contract/artifact fallback positions use clear room centres. Existing 27 tests plus compiler/analyzer and Rojo pass. Live Studio integration is still unverified.
+
+Authored ContractSpawn rooms now drive contract placement; power restoration sets the map PowerState to On and departure resets Emergency. The actual World adapter is covered by the sibling map integration test.
