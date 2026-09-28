@@ -1,0 +1,1 @@
+{"name":"PastCurfew","tree":{"$className":"DataModel","ReplicatedStorage":{"PastCurfew":{"$className":"Folder","Shared":{"$path":"src/shared"}}},"ServerScriptService":{"PastCurfew":{"$path":"src/server"}},"StarterPlayer":{"StarterPlayerScripts":{"PastCurfew":{"$path":"src/client"}}},"Workspace":{"$properties":{"FilteringEnabled":true}}}}

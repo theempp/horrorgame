@@ -1,0 +1,672 @@
+{
+  "meta": {
+    "name": "Past Curfew modular kit",
+    "version": "1.0.0",
+    "units": "stud",
+    "stud_to_m": 0.28,
+    "grid": 4,
+    "wall_thickness": 1,
+    "doorway": {
+      "w": 4,
+      "h": 8
+    },
+    "corridor_min_w": 8,
+    "deck_height": 16,
+    "note": "snap_points are local-space [X,Y,Z] offsets from piece origin (min corner). Pieces align on the 4-stud grid; props on 0.5-stud snap. Codex instantiates these as grouped Parts."
+  },
+  "pieces": [
+    {
+      "id": "floor_32x20",
+      "kind": "floor",
+      "size": [
+        32,
+        1,
+        20
+      ],
+      "snap_points": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          32,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          20
+        ],
+        [
+          32,
+          0,
+          20
+        ],
+        [
+          16,
+          0,
+          10
+        ]
+      ]
+    },
+    {
+      "id": "floor_16x8",
+      "kind": "floor",
+      "size": [
+        16,
+        1,
+        8
+      ],
+      "snap_points": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          8
+        ],
+        [
+          16,
+          0,
+          8
+        ]
+      ]
+    },
+    {
+      "id": "floor_48x48",
+      "kind": "floor",
+      "size": [
+        48,
+        1,
+        48
+      ],
+      "snap_points": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          48,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          48
+        ],
+        [
+          48,
+          0,
+          48
+        ],
+        [
+          24,
+          0,
+          24
+        ]
+      ]
+    },
+    {
+      "id": "ceil_32x20",
+      "kind": "ceiling",
+      "size": [
+        32,
+        1,
+        20
+      ],
+      "snap_points": [
+        [
+          0,
+          16,
+          0
+        ],
+        [
+          32,
+          16,
+          0
+        ],
+        [
+          0,
+          16,
+          20
+        ],
+        [
+          32,
+          16,
+          20
+        ]
+      ]
+    },
+    {
+      "id": "wall_20",
+      "kind": "wall",
+      "size": [
+        1,
+        16,
+        20
+      ],
+      "snap_points": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          20
+        ],
+        [
+          0,
+          8,
+          10
+        ]
+      ]
+    },
+    {
+      "id": "wall_32",
+      "kind": "wall",
+      "size": [
+        32,
+        16,
+        1
+      ],
+      "snap_points": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          32,
+          0,
+          0
+        ],
+        [
+          16,
+          8,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "wall_48",
+      "kind": "wall",
+      "size": [
+        48,
+        16,
+        1
+      ],
+      "snap_points": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          48,
+          0,
+          0
+        ],
+        [
+          24,
+          8,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "wall_8",
+      "kind": "wall",
+      "size": [
+        8,
+        16,
+        1
+      ],
+      "snap_points": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          8,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "wall_door_32",
+      "kind": "wall_door",
+      "size": [
+        32,
+        16,
+        1
+      ],
+      "cutout": {
+        "at": [
+          14,
+          0,
+          0
+        ],
+        "w": 4,
+        "h": 8
+      },
+      "snap_points": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          32,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          0
+        ]
+      ],
+      "note": "4x8 doorway centered"
+    },
+    {
+      "id": "wall_door_48",
+      "kind": "wall_door",
+      "size": [
+        48,
+        16,
+        1
+      ],
+      "cutout": {
+        "at": [
+          22,
+          0,
+          0
+        ],
+        "w": 4,
+        "h": 8
+      },
+      "snap_points": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          48,
+          0,
+          0
+        ],
+        [
+          24,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "wall_open_16",
+      "kind": "wall_open",
+      "size": [
+        16,
+        16,
+        1
+      ],
+      "cutout": {
+        "at": [
+          4,
+          0,
+          0
+        ],
+        "w": 8,
+        "h": 8
+      },
+      "snap_points": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          16,
+          0,
+          0
+        ]
+      ],
+      "note": "8-wide open threshold (lobby/court)"
+    },
+    {
+      "id": "wall_vent",
+      "kind": "wall_vent",
+      "size": [
+        8,
+        16,
+        1
+      ],
+      "cutout": {
+        "at": [
+          3,
+          3,
+          0
+        ],
+        "w": 2,
+        "h": 4
+      },
+      "snap_points": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          8,
+          0,
+          0
+        ]
+      ],
+      "note": "optional connector; barricadable"
+    },
+    {
+      "id": "floor_hatch",
+      "kind": "floor_hatch",
+      "size": [
+        8,
+        1,
+        8
+      ],
+      "cutout": {
+        "at": [
+          3,
+          0,
+          3
+        ],
+        "w": 2,
+        "h": 2
+      },
+      "snap_points": [
+        [
+          4,
+          0,
+          4
+        ]
+      ],
+      "note": "optional vertical hatch between stacked levels"
+    },
+    {
+      "id": "door_4x8",
+      "kind": "door_leaf",
+      "size": [
+        4,
+        8,
+        1
+      ],
+      "barricadable": true,
+      "snap_points": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          4,
+          0,
+          0
+        ],
+        [
+          2,
+          4,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "stair_flight_16",
+      "kind": "stair",
+      "size": [
+        8,
+        16,
+        24
+      ],
+      "rise": 16,
+      "run": 24,
+      "snap_points": [
+        [
+          4,
+          0,
+          0
+        ],
+        [
+          4,
+          16,
+          24
+        ]
+      ],
+      "note": "one deck of rise; landings fill remainder of shaft footprint"
+    },
+    {
+      "id": "stair_landing_20x20",
+      "kind": "stair_landing",
+      "size": [
+        20,
+        1,
+        20
+      ],
+      "snap_points": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          20
+        ],
+        [
+          20,
+          0,
+          20
+        ]
+      ]
+    },
+    {
+      "id": "pillar",
+      "kind": "pillar",
+      "size": [
+        2,
+        16,
+        2
+      ],
+      "snap_points": [
+        [
+          1,
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "corner",
+      "kind": "wall_corner",
+      "size": [
+        1,
+        16,
+        1
+      ],
+      "snap_points": [
+        [
+          0,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "railing_20",
+      "kind": "railing",
+      "size": [
+        20,
+        4,
+        1
+      ],
+      "snap_points": [
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          20,
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "id": "marker_loot",
+      "kind": "marker",
+      "size": [
+        2,
+        2,
+        2
+      ],
+      "color": "tierize",
+      "snap_points": [
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      "note": "greybox placeholder; color by loot tier (T1 green / T2 amber / T3 red)"
+    },
+    {
+      "id": "marker_hiding",
+      "kind": "marker",
+      "size": [
+        2,
+        2,
+        2
+      ],
+      "color": "#5aa9e0",
+      "snap_points": [
+        [
+          1,
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "id": "marker_extraction",
+      "kind": "marker",
+      "size": [
+        4,
+        4,
+        4
+      ],
+      "color": "#4ce07a",
+      "snap_points": [
+        [
+          2,
+          2,
+          2
+        ]
+      ]
+    },
+    {
+      "id": "marker_entity_spawn",
+      "kind": "marker",
+      "size": [
+        3,
+        3,
+        3
+      ],
+      "color": "#b060ff",
+      "snap_points": [
+        [
+          1.5,
+          1.5,
+          1.5
+        ]
+      ]
+    },
+    {
+      "id": "marker_patrol",
+      "kind": "marker",
+      "size": [
+        1,
+        1,
+        1
+      ],
+      "color": "#ff9b42",
+      "snap_points": [
+        [
+          0.5,
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    {
+      "id": "noisemaker_anchor",
+      "kind": "anchor",
+      "size": [
+        1,
+        1,
+        1
+      ],
+      "snap_points": [
+        [
+          0.5,
+          0.5,
+          0.5
+        ]
+      ],
+      "note": "placement hint for deployable noisemaker"
+    },
+    {
+      "id": "flare_bracket",
+      "kind": "anchor",
+      "size": [
+        1,
+        1,
+        1
+      ],
+      "snap_points": [
+        [
+          0.5,
+          0.5,
+          0.5
+        ]
+      ]
+    }
+  ],
+  "conventions": {
+    "origin": "min corner (lowest X,Y,Z). floorY of a level is the top surface of its floor slab.",
+    "walls": "run along X (wall_32/48/8) or along Z (wall_20). thickness 1 stud, sit on floor, height = deck_height 16.",
+    "door_cutouts": "wall_door_* carry a 4x8 gap; wall_open_16 an 8x8 gap. Align cutout center to connection.at.",
+    "optional": "wall_vent + floor_hatch back optional connectors; Codex tags them so runtime can open 50-70%.",
+    "markers": "non-collidable greybox placeholders keyed to loot_nodes / hiding_spots / extractions / entity_spawns / patrol waypoints."
+  }
+}

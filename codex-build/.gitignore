@@ -1,0 +1,8 @@
+.venv/
+.tools/
+__pycache__/
+*.pyc
+*.rbxlx
+*.rbxl
+*.lock
+.DS_Store
