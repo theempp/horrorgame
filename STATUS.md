@@ -28,3 +28,7 @@ Presentation/UI/audio are placeholders. Harbor boat travel is immediate transfer
 ## Next integration need
 
 Claude should consume `INTEGRATION_CONTRACT.md`, retain system anchors/doors/stalker authority, replace the world collision/visual shell and HUD, then verify solo stair traversal + stalker chase before four-client/mobile testing. First-party source and generated build are confined to `codex-build`; `horrorgame.md` and any Claude directory are untouched. No publication/deployment occurred.
+
+## Map takeover integration
+
+2026-09-27: initial inherited state committed before edits. Integrated project is ../claude-build/default.project.json; standalone greybox remains available here. World waits for tagged map readiness, suppresses duplicate greybox, reads PlayerSpawn/HarborDeparture/OmenPoint/HideoutAlcove and EarlyExtraction. Run bounds use the union of PlayableVolume tags. LB_mid fallback now follows its door at x=80. AgentRadius stays 1.5 in shared Config. SightTransparent parts are excluded from stalker LOS. Optional connectors remain physically closed and TraversableByAvatar=false unless authored clearances meet 4x6 vent / 4x4 hatch policy; no spec edits. Contract/artifact fallback positions use clear room centres. Existing 27 tests plus compiler/analyzer and Rojo pass. Live Studio integration is still unverified.

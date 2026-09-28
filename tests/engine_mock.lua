@@ -95,6 +95,13 @@ function World.anchor(id,kind,pos,label,hold)
 end
 function World.available(p,yes)p:SetAttribute('Available',yes);p:FindFirstChildOfClass('ProximityPrompt').Enabled=yes end
 function World.build()end
+function World.dockPosition()return World.vector(M.modules.Config.DockPosition)end
+function World.tagPosition(tag,attribute,value,fallback)return fallback end
+function World.extractionPosition(e)
+ local x=e.id=='LB_mid' and 80 or e.pos[1]
+ return Vector3.new(x,World.floorY(e.level)+2,44)
+end
+function World.isPlayablePosition(p)return p.X>=-2 and p.X<=194 and p.Z>=-2 and p.Z<=50 and p.Y<=53 end
 local Profiles={entries={}}
 function Profiles.load(p)local e=Profiles.entries[p.UserId] or {data=M.modules.Rules.newProfile()};e.player=p;Profiles.entries[p.UserId]=e;p:SetAttribute('SaveState','Offline');return e end
 function Profiles.save(e,release)e.saves=(e.saves or 0)+1;e.released=release;return true end

@@ -1,6 +1,8 @@
 -- All progression rewards are cosmetic; fixed gameplay numbers apply to everyone.
 return {
     BuildGreybox = true,
+    ConnectorClearances = {vent={4,6},hatch={4,4}},
+    AgentRadius = 1.5,
     RoundSeconds = 540, FinalCallSeconds = 60, Capacity = 100,
     BleedSeconds = 45, ReviveSeconds = 5, ExtractionSeconds = 3,
     DockPosition = {224, 5, 72}, BoardPosition = {184, 35, 24},

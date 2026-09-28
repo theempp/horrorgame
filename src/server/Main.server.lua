@@ -92,7 +92,7 @@ local function capture(p)
     bag(p);setStatus(p,"Captured");sync(p)
     if p.revivePart then p.revivePart:Destroy();p.revivePart=nil end
     p.player:SetAttribute("BleedOutAt",0)
-    teleport(p.player,World.vector(Config.DockPosition));p.player:SetAttribute("Indoors",false)
+    teleport(p.player,World.dockPosition());p.player:SetAttribute("Indoors",false)
     Analytics.emit(p.player,"failure",runId,{outcome="capture"})
 end
 local function down(p)
@@ -131,7 +131,7 @@ end
 local function extract(p)
     if p.status~="Active" then return end
     for _,item in ipairs(p.items) do if item.contract then secured=true;state:SetAttribute("ContractSecured",true) end end
-    setStatus(p,"Extracted");sync(p);teleport(p.player,World.vector(Config.DockPosition));p.player:SetAttribute("Indoors",false)
+    setStatus(p,"Extracted");sync(p);teleport(p.player,World.dockPosition());p.player:SetAttribute("Indoors",false)
     local value=0;for _,item in ipairs(p.items) do value=value+item.value end
     tell(p.player,"Extracted "..value.." Salvage. Rewards settle when the crew's run ends.")
     Analytics.emit(p.player,"extraction",runId,{outcome="escaped"})
@@ -149,7 +149,7 @@ local function dock()
     rotation=rotation%#Config.Contracts+1;previewContract()
     for _,pl in ipairs(Players:GetPlayers()) do
         pl:SetAttribute("PCStatus",Profiles.entries[pl.UserId] and "Dock" or "Loading");pl:SetAttribute("Weight",0);pl:SetAttribute("NoiseRadius",0)
-        pl:SetAttribute("Indoors",false);teleport(pl,World.vector(Config.DockPosition));local h=human(pl);if h then h.WalkSpeed=16 end
+        pl:SetAttribute("Indoors",false);teleport(pl,World.dockPosition());local h=human(pl);if h then h.WalkSpeed=16 end
     end
 end
 local function setupContract()
@@ -164,7 +164,7 @@ local function setupContract()
     end
     for i=1,total do
         local label=contract.kind=="power" and (i==1 and "Restore power" or "Recover purser's key") or (contract.kind=="evidence" and "Collect evidence" or "Recover luggage tag")
-        local part,prompt=World.anchor("contract_"..i,"Contract",World.roomPosition(pool[i].id)+Vector3.new(4,0,0),label,2)
+        local part,prompt=World.anchor("contract_"..i,"Contract",World.roomPosition(pool[i].id),label,2)
         addDynamic(part);table.insert(contractAnchors,part)
         if contract.kind=="power" and i==2 then World.available(part,false) end
         Interactions.bind(part,prompt,function(pl) return active(pl) and not visited[i] end,function(pl)
@@ -214,13 +214,13 @@ local function depart(player)
     end
     for i,id in ipairs(Config.Collection.items) do
         local node=Map.loot_nodes[math.min(#Map.loot_nodes,i*5)]
-        local part,prompt=World.anchor("artifact_"..id,"Loot",World.roomPosition(node.room)+Vector3.new(-4,0,0),Config.Items[id].name,1);addDynamic(part)
+        local part,prompt=World.anchor("artifact_"..id,"Loot",World.roomPosition(node.room),Config.Items[id].name,1);addDynamic(part)
         local taken=false
         Interactions.bind(part,prompt,active,function(pl) if not taken and give(participants[pl.UserId],makeItem(id,false)) then taken=true;World.available(part,false) end end)
     end
     local disabled=rng:NextInteger(1,#Map.extractions)
     for i,e in ipairs(Map.extractions) do
-        local part,prompt=World.anchor(e.id,"Extraction",Vector3.new(e.pos[1],World.floorY(e.level)+2,44),"Extract / bank carried loot",Config.ExtractionSeconds)
+        local part,prompt=World.anchor(e.id,"Extraction",World.extractionPosition(e),"Extract / bank carried loot",Config.ExtractionSeconds)
         addDynamic(part);table.insert(extractionAnchors,part);World.available(part,i~=disabled)
         prompt.PromptButtonHoldBegan:Connect(function(pl) if active(pl) then emitNoise(participants[pl.UserId],120,part.Position) end end)
         Interactions.bind(part,prompt,active,function(pl) extract(participants[pl.UserId]) end)
@@ -233,9 +233,9 @@ local function depart(player)
 end
 World.build()
 state:SetAttribute("TraitorsEnabled",false);state:SetAttribute("Phase","Dock");state:SetAttribute("RunId",runId);previewContract()
-local departure,depPrompt=World.anchor("depart","Departure",World.vector(Config.DockPosition)+Vector3.new(-8,-2,0),"Depart now",.5)
+local departure,depPrompt=World.anchor("depart","Departure",World.tagPosition("HarborDeparture",nil,nil,World.dockPosition()+Vector3.new(-8,-2,0)),"Depart now",.5)
 Interactions.bind(departure,depPrompt,function() return phase=="Dock" end,depart)
-local omen,omenPrompt=World.anchor("omen","Omen",World.vector(Config.DockPosition)+Vector3.new(12,-2,4),"Inspect uncertain omen",1)
+local omen,omenPrompt=World.anchor("omen","Omen",World.tagPosition("OmenPoint",nil,nil,World.dockPosition()+Vector3.new(12,-2,4)),"Inspect uncertain omen",1)
 Interactions.bind(omen,omenPrompt,function() return phase=="Dock" end,function(pl)
     tell(pl,Config.Omens[rotation]);Analytics.emit(pl,"harbor_omen",runId)
 end)
@@ -246,7 +246,7 @@ local function buy(player)
     if Rules.buyDecoration(entry.data,Config.DecorationCost) then mirrorProfile(player);tell(player,"Hideout display alcove unlocked. Cosmetic only.");task.spawn(function() Profiles.save(entry,false) end)
     else tell(player,"Display alcove costs 100 Salvage; limit one.") end
 end
-local hideout,hidePrompt=World.anchor("hideout","Hideout",World.vector(Config.DockPosition)+Vector3.new(8,-2,-6),"Build display alcove — 100 Salvage",1)
+local hideout,hidePrompt=World.anchor("hideout","Hideout",World.tagPosition("HideoutAlcove",nil,nil,World.dockPosition()+Vector3.new(8,-2,-6)),"Build display alcove — 100 Salvage",1)
 Interactions.bind(hideout,hidePrompt,function() return phase=="Dock" end,buy)
 for _,door in pairs(World.doors) do
     local prompt=Instance.new("ProximityPrompt");prompt.ActionText="Open / close door";prompt.ObjectText="Door";prompt.HoldDuration=.4;prompt.MaxActivationDistance=10;prompt.Parent=door
@@ -301,7 +301,7 @@ local function onCharacter(player,character)
     local p=participants[player.UserId]
     -- Resetting or dying cannot generate a fresh active character/loadout.
     if p and (p.status=="Active" or p.status=="Downed") then capture(p) end
-    teleport(player,World.vector(Config.DockPosition));player:SetAttribute("Indoors",false)
+    teleport(player,World.dockPosition());player:SetAttribute("Indoors",false)
     h.Died:Connect(function()
         local current=participants[player.UserId]
         if current and (current.status=="Active" or current.status=="Downed") then capture(current) end
@@ -354,10 +354,11 @@ RunService.Heartbeat:Connect(function(dt)
             -- Correct implausible horizontal travel and bounds; never accept client weight/speed.
             local pos=r.Position;local last=rt.lastPos or pos;local delta=pos-last
             local maxTravel=Rules.speed(Rules.weight(p.items),p.sneak)*math.min(1,clock-(rt.lastCheck or clock)) + 3
-            if Vector3.new(delta.X,0,delta.Z).Magnitude>maxTravel or pos.X< -2 or pos.X>194 or pos.Z< -2 or pos.Z>50 or pos.Y>53 then
+            if Vector3.new(delta.X,0,delta.Z).Magnitude>maxTravel or not World.isPlayablePosition(pos) then
                 r.CFrame=CFrame.new(last);r.AssemblyLinearVelocity=Vector3.zero;pos=last
             end
             if pos.Y< -5 then capture(p) end
+            p.player:SetAttribute("Indoors",pos.X>=0 and pos.X<=192 and pos.Z>=0 and pos.Z<=48 and pos.Y<49)
             rt.lastPos=pos;rt.lastCheck=clock
             local moving=Vector3.new(delta.X,0,delta.Z).Magnitude>.15
             local radius=Rules.noise(Rules.weight(p.items),p.sneak,moving);p.player:SetAttribute("NoiseRadius",radius)

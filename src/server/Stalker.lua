@@ -40,7 +40,9 @@ function Stalker:sees(p)
     local delta=r.Position-self.root.Position
     if delta.Magnitude>15 then return false end
     if delta.Magnitude>.01 and self.root.CFrame.LookVector:Dot(delta.Unit)<math.cos(math.rad(50)) then return false end
-    local params=RaycastParams.new();params.FilterType=Enum.RaycastFilterType.Exclude;params.FilterDescendantsInstances={self.model}
+    local params=RaycastParams.new();params.FilterType=Enum.RaycastFilterType.Exclude;local exclude={self.model}
+    for _,glass in ipairs(game:GetService("CollectionService"):GetTagged("SightTransparent")) do table.insert(exclude,glass) end
+    params.FilterDescendantsInstances=exclude
     local hit=workspace:Raycast(self.root.Position,delta,params)
     return not hit or hit.Instance:IsDescendantOf(p.player.Character)
 end
@@ -48,7 +50,7 @@ function Stalker:pathTo(pos,now)
     if self.computing or now-self.lastPath<.8 then return end
     self.lastPath=now;self.computing=true
     task.spawn(function()
-        local path=PathfindingService:CreatePath({AgentRadius=1.5,AgentHeight=6,AgentCanJump=true,WaypointSpacing=4})
+        local path=PathfindingService:CreatePath({AgentRadius=Config.AgentRadius,AgentHeight=6,AgentCanJump=true,WaypointSpacing=4})
         local ok=pcall(function() path:ComputeAsync(self.root.Position,pos) end)
         if not self.dead and ok and path.Status==Enum.PathStatus.Success then self.waypoints=path:GetWaypoints();self.waypoint=2 end
         self.computing=false

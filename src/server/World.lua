@@ -1,8 +1,55 @@
 local Config=require(game.ReplicatedStorage.PastCurfew.Shared.Config)
 local Map=require(game.ReplicatedStorage.PastCurfew.Shared.MapShip)
+local CollectionService=game:GetService("CollectionService")
 local World={anchors={},doors={}}
 local function v(a) return Vector3.new(a[1],a[2],a[3]) end
 World.vector=v
+-- Presentation geometry remains owned by claude-build; discover only tags/anchors.
+function World.tagged(tag,attribute,value)
+    for _,p in ipairs(CollectionService:GetTagged(tag)) do
+        if p:IsDescendantOf(workspace) and (not attribute or p:GetAttribute(attribute)==value) then return p end
+    end
+end
+function World.tagPosition(tag,attribute,value,fallback)
+    local p=World.tagged(tag,attribute,value)
+    return p and p.Position or fallback
+end
+function World.dockPosition()
+    return World.tagPosition("PlayerSpawn","Index",1,v(Config.DockPosition)-Vector3.new(0,3,0))+Vector3.new(0,3,0)
+end
+function World.extractionPosition(e)
+    local x=e.pos[1]
+    for _,c in ipairs(Map.connections) do if c.a==e.id then x=c.at[1] end end
+    return World.tagPosition("EarlyExtraction","ExtractionId",e.id,Vector3.new(x,World.floorY(e.level)+2,44))
+end
+function World.isPlayablePosition(pos)
+    local found=false
+    for _,p in ipairs(CollectionService:GetTagged("PlayableVolume")) do
+        if p:IsDescendantOf(workspace) then
+            found=true
+            local q=p.CFrame:PointToObjectSpace(pos);local h=p.Size/2
+            if math.abs(q.X)<=h.X and math.abs(q.Y)<=h.Y and math.abs(q.Z)<=h.Z then return true end
+        end
+    end
+    if found then return false end
+    return pos.X>=-2 and pos.X<=194 and pos.Z>=-2 and pos.Z<=50 and pos.Y<=53 and pos.Y>=-5
+end
+function World.configureConnectors()
+    for _,p in ipairs(CollectionService:GetTagged("OptionalConnector")) do
+        if p:IsDescendantOf(workspace) then
+            local kind=p:GetAttribute("Kind")
+            local minimum=Config.ConnectorClearances[kind]
+            local w=p:GetAttribute("ClearWidth") or 0
+            local h=p:GetAttribute("ClearHeight") or 0
+            local traversable=minimum and w>=minimum[1] and h>=minimum[2] and p:GetAttribute("TraversableByAvatar")==true
+            -- Baseline 2x4 vents / 2x2 hatches cannot safely pass an avatar.
+            if not traversable then
+                p:SetAttribute("TraversableByAvatar",false);p:SetAttribute("Open",false)
+                if p:IsA("BasePart") then p.CanCollide=true end
+            end
+        end
+    end
+end
 function World.part(parent,name,size,pos,color,collide)
     local p=Instance.new("Part"); p.Name=name;p.Anchored=true;p.Size=size;p.Position=pos
     p.Color=color or Color3.fromRGB(50,75,80);p.CanCollide=collide~=false;p.TopSurface=Enum.SurfaceType.Smooth;p.Parent=parent;return p
@@ -65,7 +112,14 @@ end
 function World.build()
     for _,name in ipairs({"PastCurfewWorld","PastCurfewAnchors"}) do local old=workspace:FindFirstChild(name);if old and (name=="PastCurfewAnchors" or Config.BuildGreybox) then old:Destroy() end end
     World.folder=Instance.new("Folder");World.folder.Name="PastCurfewAnchors";World.folder.Parent=workspace
-    if Config.BuildGreybox then geometry() end
+    local pc=game.ReplicatedStorage.PastCurfew
+    if pc:FindFirstChild("Map") then
+        local map=workspace:WaitForChild("PastCurfewMap")
+        while not map:GetAttribute("Ready") do task.wait() end
+        World.presentation=true
+    end
+    if Config.BuildGreybox and not World.presentation then geometry() end
+    World.configureConnectors()
     for _,c in ipairs(Map.connections) do if c.kind=="door" and c.b:match("^CORR") and c.a~="EXT_ship" then
         local pos=v(c.at)+Vector3.new(0,4,0)
         local door=World.part(World.folder,c.id,Vector3.new(4,8,1),pos)
