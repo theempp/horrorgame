@@ -20,6 +20,8 @@ class IntegrationTests(unittest.TestCase):
    end
    local W=assert(loadstring(adapter_source))()
    W.build()
+   assert(W.contractRooms("power",{})[2].id=="A_L6")
+   W.setPowerState("On");assert(workspace.PastCurfewMap:GetAttribute("PowerState")=="On")
    assert(W.presentation and not workspace:FindFirstChild("PastCurfewWorld"))
    assert((W.dockPosition()-Vector3.new(146,13,724)).Magnitude<.01)
    assert(W.tagPosition("HarborDeparture",nil,nil).Z==594)

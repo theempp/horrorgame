@@ -1,21 +1,12 @@
 # Map status
 
-Step 1 verified: hull and superstructure assembled with interior shell. 3,173 parts, 48 lights; strict harness passes and temporary module-only Rojo project builds. Port elevation and harbor view inspected. Preview square framing fixed for Quick Look.
+Requested steps 1–10 completed and headless-verified. Final checks: 16 map tests and 27 systems tests passed; all map Luau compiled; spec mirror verified; both final Rojo places rebuilt; harbor, deck A and corrected ship-only elevation previews inspected. See HANDOFF.md for ordered commits and README.md for commands.
 
-Next: step 2 exterior decks. Steps 2–10 and codex-build integration fixes remain. Final runtime Rojo projects arrive in step 8. Headless previews are geometry approximations, not Roblox lighting renders. Studio playtest remains unverified.
+- Hull, exterior, harbor, all 32 room themes and both variants are assembled.
+- Tags, gameplay adapters, power circuits, atmosphere, animated details and review controls are connected.
+- Integrated and map-only Rojo projects are available without duplicated modules.
+- Latest measured budget: 4,786 replicated parts, 515 stored variant parts, 103 active lights (8 shadows).
+- Automated coverage: 16 map tests and 27 sibling systems tests, plus Lua compilation, spec extraction and Rojo builds. Both variants reach all 32 rooms in the collision-derived navigation test.
+- Every ordered implementation step included harness, rendered preview inspection and Rojo checks.
 
-Step 2 verified: exterior decks, guarded lifeboat gates, thin-tread accommodation ladder, boarding signs/lights. 3,490 parts / 50 lights. Harness, Rojo, and inspected aft-deck/ladder/promenade previews. Fixed near-plane polygon clipping in previews.
-
-Step 3 verified: atmosphere, sky/clouds, color/bloom, bounded terrain water fill and 116 hull air cuts, harbor land/cliffs/breakwaters. 3,517 parts / 50 lights. Harness, Rojo, harbor preview inspected. Lighting appearance requires Studio; SVG previews do not simulate Roblox post-processing.
-
-Step 4 verified: harbor structures, pier/pontoon/gangway, moored tender, briefing/office, industrial dressing, lighthouse/buoys and boundaries. 3,833 parts / 71 lights. Harness and Rojo pass; harbor plan and spawn reveal inspected.
-
-Step 5 verified: all 32 rooms dressed with programme-specific recipes and mirrored v1/v2 layouts, spec-position hollow hide props, reserved aisles/loot/hide approaches, room lights and story papers. 4,403 parts / 103 lights (8 hero shadows). Both variants execute; plans A/B/C and ballroom inspected; Rojo passes.
-
-Step 6 verified: manifest anchors, all 20 tag minima, room/zone/streaming/playable volumes, corrected LB_mid pad, inactive room variants in ServerStorage. 4,688 replicated parts / 103 active lights; 515 inactive variant parts. Harness, tag-count check, Rojo, and tagged A-deck preview pass. Gameplay-side adapter remains to be connected.
-
-Step 7 implemented and headless-verified: atmosphere blending, quality/circuits, doors, lighthouse/radar animation, review UI/camera path. Runtime tests cover light state and door reset, harness/Rojo pass; promenade preview inspected. UI input and real lighting remain Studio-only checks. No audio assets supplied or played.
-
-Step 8 verified: default.project.json mounts map and sibling game systems without copies; review.project.json runs map-only review. Streaming properties are serialized in both projects. Both Rojo builds pass, harness and preview rechecked. Gameplay adapter uses tagged bounds/harbor/extraction anchors; glass is excluded from stalker LOS. Codex tests: 27 pass, compile/analyze pass. Vents/hatches stay closed under clearance policy (4x6/4x4 minimum); source spec remains unchanged.
-
-Step 9 verified: 16 headless tests cover determinism, idempotence, tags/attributes, spec/variants, budgets, Lua 5.1 compilation, real sibling World adapter, runtime lights/doors, zone identity, both Rojo projects, and collision-derived voxel navigation. All 32 rooms in both variants reachable; ship route stays inside playable volumes; harbor departure reachable. Fixed ladder guard overhang and tender/pontoon clearance. Added explicit stair graph links. 4,786 replicated parts, 515 inactive parts, 103 active lights. Ladder and harbor plan previews re-inspected.
+Studio play-mode physics/pathfinding, streaming, review UI input, actual lighting, multiplayer and device performance remain unverified. Optional vents/hatches are intentionally closed under the documented clearance policy. Audio is metadata only; gameplay harbor departure is immediate. No publishing, asset uploads or purchases occurred; horrorgame.md is unchanged.

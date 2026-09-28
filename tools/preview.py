@@ -247,9 +247,12 @@ def main():
         f.write(svg)
     if "--views" in sys.argv:
         build.parts.extend(water_parts(build))
+        scene_parts = build.parts
+        build.parts = [p for p in scene_parts if abs(p.pos[2]) < 180]
         ortho = render(build, (0, 50, 1400), (0, 50, 0), ortho=1.9, W=1800, H=700, fog=None, title="Port elevation (orthographic)")
         with open(os.path.join(out_dir, "elevation_port.svg"), "w") as f:
             f.write(ortho)
+        build.parts = scene_parts
         for name, (cam, tgt, fov) in VIEWS.items():
             interior = name.startswith("corridor") or name == "ballroom"
             svg = render(build, cam, tgt, fov=fov, fog=None if interior else (0.33, 700), max_dist=300 if interior else 2600, title=name)
