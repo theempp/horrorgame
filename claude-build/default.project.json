@@ -1,0 +1,45 @@
+{
+  "name": "PastCurfew",
+  "tree": {
+    "$className": "DataModel",
+    "Workspace": {
+      "$properties": {
+        "StreamingEnabled": true,
+        "StreamingMinRadius": 64,
+        "StreamingTargetRadius": 256
+      }
+    },
+    "ReplicatedStorage": {
+      "PastCurfew": {
+        "$className": "Folder",
+        "$attributes": {
+          "MapReview": false
+        },
+        "Map": {
+          "$path": "src/Map"
+        },
+        "Shared": {
+          "$path": "../codex-build/src/shared"
+        }
+      }
+    },
+    "ServerScriptService": {
+      "PastCurfewMap": {
+        "$path": "src/Server"
+      },
+      "PastCurfewSystems": {
+        "$path": "../codex-build/src/server"
+      }
+    },
+    "StarterPlayer": {
+      "StarterPlayerScripts": {
+        "PastCurfewMap": {
+          "$path": "src/Client"
+        },
+        "PastCurfewSystems": {
+          "$path": "../codex-build/src/client"
+        }
+      }
+    }
+  }
+}
